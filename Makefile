@@ -1,6 +1,7 @@
-REPO=https://github.com/Alkanoor/effective-challenge-fiesta.git
+REPO=git@github.com:Alkanoor/effective-challenge-fiesta.git
 
 init:
+	git config --global user.email "Alkanoor@github.com"
 	git init
 	@git stage --all
 	@git commit -m "first commit"
@@ -20,4 +21,4 @@ push:
 
 pull:
 	@git stash
-	git pull
+	git pull origin master
