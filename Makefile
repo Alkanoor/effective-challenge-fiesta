@@ -12,7 +12,7 @@ init-existing:
 	git init
 	git stage --all
 	git commit -m "first commit"
-	git pull origin master
+	git push -u origin master
 
 push:
 	git stage --all
