@@ -1,6 +1,7 @@
 REPO=git@github.com:Alkanoor/effective-challenge-fiesta.git
 
 init:
+	echo "Makefile">>.gitignore
 	git config --global user.email "Alkanoor@github.com"
 	git init
 	git stage --all
@@ -9,6 +10,7 @@ init:
 	git push -u origin master
 
 init-existing:
+	echo "Makefile">>.gitignore
 	git init
 	git stage --all
 	git commit -m "first commit"
