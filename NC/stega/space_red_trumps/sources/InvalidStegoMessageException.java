@@ -1,3 +1,0 @@
-class InvalidStegoMessageException
-  extends Exception
-{}

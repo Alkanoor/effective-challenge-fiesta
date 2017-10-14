@@ -1,2 +1,0 @@
-ssh classic1@wargame.w3challs.com -p 10101
-scp -P  10101 classic1@wargame.w3challs.com:/home/classic1/mystrncpy mystrncpy

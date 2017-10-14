@@ -1,5 +1,0 @@
-ssh classic7@wargame.w3challs.com -p 10101
-scp -P 10101 classic7@wargame.w3challs.com:/home/classic7/sources/* .
-scp -P 10101 classic7@wargame.w3challs.com:/home/classic7/Comparator .
-scp -P 10101 classic7@wargame.w3challs.com:/tmp/a/dumped dumped_orig
-scp -P 10101 exploit.c classic7@wargame.w3challs.com:/tmp/b/exploit.c

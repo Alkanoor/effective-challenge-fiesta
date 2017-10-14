@@ -1,2 +1,0 @@
-ssh classic3@wargame.w3challs.com -p 10101
-scp -P 10101 exploit.c classic3@wargame.w3challs.com:/tmp/a/exploit.c

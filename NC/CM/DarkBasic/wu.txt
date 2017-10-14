@@ -1,9 +1,0 @@
-Le plus dur ici c'est de tracer ...
-En fait DarkBasic c'est une VM mais il fallait le savoir.
-On commence par tracer les appels à getTextExtentPoint32A.
-En déroulant sous IDA on se rend compte qu'il peut y avoir des appels à atof.
-On break à ces emplacements et on tombe sur une adresse mémoire intéressante 0x163A30.
-On suit tous les accès à cette zone et à côté.
-On voit que le serial final est vérifié en 0x43DF55.
-Au final le sérial est sqrt(serial)+0x4DA = 0x1BD0
-Puis serial = 34550884

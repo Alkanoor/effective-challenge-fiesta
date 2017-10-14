@@ -1,7 +1,0 @@
-b main
-set follow-fork-mode child
-r
-continue
-b *0x08048e55
-b *0x08048f7f
-continue
