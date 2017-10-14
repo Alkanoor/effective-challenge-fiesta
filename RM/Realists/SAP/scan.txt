@@ -1,0 +1,24 @@
+Running 'saprouterSpy' against [ctf05.root-me.org(0)-SAPRO
+Trying to connect with remote SAProuter...
+Connection established.
+
+Scanning 2690 ports in host 127.0.0.1
+Open & reachable ports on target 127.0.0.1:
+- 1128/tcp      SAPHostControl
+- 3200/tcp      SAP Dispatcher
+- 3201/tcp      SAP Dispatcher
+- 3299/tcp      SAProuter
+- 3300/tcp      SAP Gateway
+- 3600/tcp      SAP Message Server
+- 3601/tcp      SAP Message Server
+- 8000/tcp      SAP ICM HTTP
+- 8101/tcp      SAP Message Server HTTP
+- 40000/tcp     SAP IGS - Multiplexer
+- 40001/tcp     SAP IGS - Portwatcher
+- 40002/tcp     SAP IGS - Portwatcher
+- 40080/tcp     SAP IGS - HTTP Administration
+- 50001/tcp     SAP J2EE Dispatcher - HTTPS
+- 50013/tcp     SAP Start Service
+- 50014/tcp     SAP Start Service
+- 50113/tcp     SAP Start Service
+- 50114/tcp     SAP Start Service

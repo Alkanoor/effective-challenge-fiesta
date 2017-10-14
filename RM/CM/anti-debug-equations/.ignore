@@ -1,0 +1,5 @@
+dump.*
+sect.*
+\.gdb.*
+peda.*
+.*\.i64

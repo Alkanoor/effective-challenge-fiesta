@@ -1,0 +1,4 @@
+bin
+ch18
+peda.*
+\.gdb.*

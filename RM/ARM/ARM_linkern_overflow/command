@@ -1,0 +1,1 @@
+qemu-system-arm -m 32M -M vexpress-a9 -kernel vmlinuz -dtb vexpress-v2p-ca9.dtb -initrd initramfs.img -append "console=ttyAMA0,115200 oops=panic panic=1 loglevel=0" -nographic -s

@@ -1,0 +1,34 @@
+[*] ctf02.root-me.org:1433 -  - BS\Administrator
+[*] ctf02.root-me.org:1433 -  - BS\Guest
+[*] ctf02.root-me.org:1433 -  - BS\krbtgt
+[*] ctf02.root-me.org:1433 -  - BS\Domain Admins
+[*] ctf02.root-me.org:1433 -  - BS\Domain Users
+[*] ctf02.root-me.org:1433 -  - BS\Domain Guests
+[*] ctf02.root-me.org:1433 -  - BS\Domain Computers
+[*] ctf02.root-me.org:1433 -  - BS\Domain Controllers
+[*] ctf02.root-me.org:1433 -  - BS\Cert Publishers
+[*] ctf02.root-me.org:1433 -  - BS\Schema Admins
+[*] ctf02.root-me.org:1433 -  - BS\Enterprise Admins
+[*] ctf02.root-me.org:1433 -  - BS\Group Policy Creator Owners
+[*] ctf02.root-me.org:1433 -  - BS\Read-only Domain Controllers
+[*] ctf02.root-me.org:1433 -  - BS\RAS and IAS Servers
+[*] ctf02.root-me.org:1433 -  - BS\Allowed RODC Password Replication Group
+[*] ctf02.root-me.org:1433 -  - BS\Denied RODC Password Replication Group
+[*] ctf02.root-me.org:1433 -  - BS\DC01$
+[*] ctf02.root-me.org:1433 -  - BS\DnsAdmins
+[*] ctf02.root-me.org:1433 -  - BS\DnsUpdateProxy
+[*] ctf02.root-me.org:1433 -  - BS\dmurphy
+[*] ctf02.root-me.org:1433 -  - BS\sysadmin
+[*] ctf02.root-me.org:1433 -  - BS\boss
+[*] ctf02.root-me.org:1433 -  - BS\devops
+[*] ctf02.root-me.org:1433 -  - BS\egoldstein
+[*] ctf02.root-me.org:1433 -  - BS\klibby
+[*] ctf02.root-me.org:1433 -  - BS\jpardella
+[*] ctf02.root-me.org:1433 -  - BS\pcook
+[*] ctf02.root-me.org:1433 -  - BS\lmurphy
+[*] ctf02.root-me.org:1433 -  - BS\mbracco
+[*] ctf02.root-me.org:1433 -  - BS\ebelfort
+[*] ctf02.root-me.org:1433 -  - BS\rsanchez
+[*] ctf02.root-me.org:1433 -  - BS\SRVWEB$
+[*] ctf02.root-me.org:1433 -  - BS\srvstaff$
+[*] ctf02.root-me.org:1433 -  - BS\ldap

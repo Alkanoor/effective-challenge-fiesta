@@ -1,0 +1,9 @@
+On utilise l'émulateur Tilem.
+Avec la ROM dans ce dossier (ti84se.rom si non présente).
+On upload le programme dans l'émulateur.
+Un disass avec IDA en parallèle : on observe quand on pause et qu'on boucle qu'on reste dans 0x9E64 à 0x9E72 puis de 0x9E22 à 0x9E2D.
+On regarde la correspondance avec le disass : 0x9E64 => 0xAF.
+Ensuite on constate dans le code un jump vers 0x9F44 et une comparaison qui fait soit entrer dans un "réussi" soit dans un "échoué".
+La comparaison s'effectue char par char avec l'un étant l'input et l'autre étant en 0x9FE2.
+Ne reste que la correspondance lettre <=> touche à effectuer sachant que Y Z theta correspond à 0x22, 0x1A, 0x12.
+Le mot de passe final : blaireau

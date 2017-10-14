@@ -1,0 +1,10 @@
+On utilise les quadruplets.
+On dispose d'une base de données avec pour chaque quadruplet déjà rencontré une fréquence associée.
+On veut explorer tout en allant vers la solution la plus probable.
+
+On cherche donc pour chaque état les états suivants les plus probables.
+
+Soit m = m1 m2 ... mn le message chiffré.
+Pour chaque échange de lettres e, on regarde si cela améliore l'accuracy du message par rapport aux fréquences de référence.
+On mesure ainsi la probabilité que l'échange de deux lettres soit bénéfique.
+On tire au sort parmi cela ensuite.

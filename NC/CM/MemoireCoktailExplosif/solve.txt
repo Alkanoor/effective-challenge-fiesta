@@ -1,0 +1,3 @@
+Le programme fait la comparaison quand on clique droit sur l'image en haut.
+Il crée un fichier C:\molotov.zip et met une chaine de 0 et 1 dedans si possible (il faut donc changer le nom en C:\m\lotov.zip et créer un dossier m).
+Il effectue la comparaison finale en 0x401582 avec nc-popovjoe-010 (3 premiers chars de la chaîne).

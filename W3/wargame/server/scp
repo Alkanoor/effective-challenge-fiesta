@@ -1,0 +1,3 @@
+ssh classic4@wargame.w3challs.com -p 10101
+scp -P 10101 classic4@wargame.w3challs.com:/home/classic4/server.c src.c
+scp -P 10101 exploit.py classic4@wargame.w3challs.com:/tmp/b/exploit.py

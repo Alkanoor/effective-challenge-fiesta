@@ -1,0 +1,5 @@
+exploit
+initramfs\.img
+module\.ko
+vexpre.*
+vmlinuz

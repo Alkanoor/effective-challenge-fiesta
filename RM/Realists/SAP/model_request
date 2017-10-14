@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Quick & Dirty script to unlock all users locked by SAP_lock_users.sh
+
+ISQL=/sybase/NPL/OCS-15_0/bin/isql64
+ECHO=/bin/echo
+DB_PARAM="-Usapsa -SNPL -X -Psapsapsap"
+
+$ECHO "Starting unlock SAP users"
+$ISQL $DB_PARAM <<EOF
+use NPL
+go
+XXXXXXXXXXXXXXXXXXXXXXXXXX
+go
+EOF
+$ECHO "Users released !"

